@@ -1,0 +1,29 @@
+    {
+        "songs": [
+            {
+                "title": "Pancho & Lefty",
+                "artist": "Townes Van Zandt",
+                "album": "Be Here To Love Me"
+            },
+            {
+                "title": "San Franciscan Night",
+                "artist": "The Animals",
+                "album": "The Animals Retrospective"
+            },
+            {
+                "title": "Another One",
+                "artist": "Mac Demarco",
+                "album": "Another One"
+            },
+            {
+                "title": "Old Man",
+                "artist": "Neil Young",
+                "album": "Harvest"
+            },
+            {
+                "title": "On the Beach",
+                "artist": "Neil Young",
+                "album": "On the Beach"
+            }
+        ]
+    }
