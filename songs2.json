@@ -1,26 +1,31 @@
 {
     "songs": [
         {
+            "id": 1,
             "title": "Dreams",
             "artist": "Pink Floyd",
             "album": "Dark Side of the Moon"
         },
         {
+            "id": 2,
             "title": "Sea Lion Goth Blues",
             "artist": "The Growlers",
             "album": "Hot Tropics"
         },
         {
+            "id": 3,
             "title": "Easy Wind",
             "artist": "Grateful Dead",
             "album": "Working Man's Dead"
         },
         {
+            "id": 4,
             "title": "Take Me Home Jesus",
             "artist": "Link Wray",
             "album": "Link Wray"
         },
         {
+            "id": 5,
             "title": "How Can You Really",
             "artist": "Foxygen",
             "album": "How Can You Really"

@@ -1,4 +1,20 @@
-var app = angular.module('musicHistAgainApp', []);
+var app = angular.module('musicHistAgainApp', ['ngRoute']);
+
+app.config(['$routeProvider',
+	function($routeProvider){
+		$routeProvider
+			.when('/songs/list', {
+				templateUrl: 'partials/song-list.html',
+				controller: 'SongListCtrl'
+			})
+			.when('songs/new', {
+				templateUrl: 'partials/song-form.html',
+				controller: 'AddSongCtrl'
+			});
+	}]);
+
+app.factory('song_service', function($http,$q) {
+});
 
 app.controller("navCtrl", function($scope){
 	$scope.viewMusic = "View Music";
@@ -39,12 +55,12 @@ app.controller("leftFormCtrl", function($scope){
 		// });
 
 
-app.controller("songListCtrl", function($scope, $http) {
+app.controller("SongListCtrl", function($scope, $http) {
   $scope.songs = null;
   $http.get('songs.json')
   .success(function(data, status, headers, config) {
       console.log("data", data);
-    return $scope.songs = data;
+    return $scope.songs = data.songs;
   })
   .error(function(data, status, headers, config) {
     console.log("data", data);

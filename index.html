@@ -7,87 +7,51 @@
 <title>Music App with Angular</title>
 </head>
 <body ng-app="musicHistAgainApp">
-<div class="navbar navbar-fixed-top">
-
-	<section ng-controller= "navCtrl">
-	<h5> {{viewMusic}} | {{addMusic}} | {{profile}}</h5>
-	</section>
-</div>
 
 
-	
-	<section ng-controller ="leftFormCtrl">
-	<div class ="row">
-		<div class= "leftSelectorForm col-md-4">
-
-		<div>Song Length:
-    	<label for="song-length"></label>
-    	<input type="range" name="song-length" min="0.00" max="10.00" step="0.5" value="11.00" />
-    </div>
-			<div>
-				Artist:
-				<select
-					ng-model="theArtist"
-				></select>
-			</div>
-
-			<div>
-				Album:
-				<select
-					ng-model="theAlbum"
-				></select>
-			</div>
-
-			<div>
-				Genre:
-				<br/>
-				<div class="row">
-					<div class="col-md-6">
-						<label>Rock:
-				    <input type="checkbox" ng-model="checkboxModel.rock">
-				  	</label>
-				  	<label>Pop:
-				    <input type="checkbox" ng-model="checkboxModel.pop">
-				    </label>
-				    <br/>
-				    <label>Blues:
-				    <input type="checkbox" ng-model="checkboxModel.blues">
-				    </label>
-						<label>Classical:
-				    <input type="checkbox" ng-model="checkboxModel.classical">
-				  	</label><br/>
-				  	<label>Jazz:
-				    <input type="checkbox" ng-model="checkboxModel.jazz"
-				    </label>
-				    <label>Hip Hop:
-				    <input type="checkbox" ng-model="checkboxModel.hiphop"
-				    </label><br/>
-				  </div>  
-			   	
-			  </div>
-			</div>
-			
-			<button ng-click="">Filter</button>
-			<!-- "filter musicHistAgainApp()" -->
-
-		</div>
-	</section>
-
-	<section ng-controller ="songListCtrl">
+	<section ng-controller ="SongListCtrl">
 	<div class="row">
 	<div class = "songList col-md-8">
-		song list test
-		{{songs}}
-
-	</div>
+	<div ng-view></div>
+	</div> 
+	</div>	
 
 		
 
 
 	</section>
-	</div>	
 
+<script src="lib/bower_components/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript" src= "/lib/bower_components/angular/angular.min.js"></script>
+<script src="lib/bower_components/angular-route/angular-route.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
 <script type = "text/javascript" src = "main.js"></script>
+
+
 </body>
-</html>
+</html> 
+
+
+<!-- ------------------------------ copied the below from curriculum----------
+
+<!-- <!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>NSS Starter Kit - Angular</title>
+  <link rel="stylesheet" type="text/css" href="styles/main.css">
+</head>
+
+<body ng-app="SongApp">
+
+  <div ng-view></div>
+
+  <script src="lib/bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="lib/bower_components/angular/angular.min.js"></script>
+  <script src="lib/bower_components/angular-route/angular-route.min.js"></script>
+
+  <script src="app/app.js"></script>
+  <script src="app/controllers/SongCtrl.js"></script>
+</body>
+</html> -->
