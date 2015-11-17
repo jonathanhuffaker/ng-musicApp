@@ -1,4 +1,4 @@
-var app = angular.module('musicHistAgainApp', ['ngRoute']);
+var app = angular.module('musicHistAgainApp', ['firebase','ngRoute']);
 
 app.config(['$routeProvider',
 	function($routeProvider){
@@ -7,69 +7,73 @@ app.config(['$routeProvider',
 				templateUrl: 'partials/song-list.html',
 				controller: 'SongListCtrl'
 			})
-			.when('songs/new', {
+			.when('/songs/new', {
 				templateUrl: 'partials/song-form.html',
 				controller: 'AddSongCtrl'
-			});
+			})
+			.when('/songs/:songId', {
+				templateUrl: 'partials/song-detail.html',
+				controller: 'SongDetailCtrl'
+			})
+			.otherwise({ redirectTo: '/songs/list' });
 	}]);
-
-app.factory('song_service', function($http,$q) {
-});
-
-app.controller("navCtrl", function($scope){
-	$scope.viewMusic = "View Music";
-	$scope.addMusic = "Add Music";
-	$scope.profile = "Profile";
-})
-
-app.controller("leftFormCtrl", function($scope){
-	$scope.songLength = "slider Here";
-	$scope.artist = "Artist";
-	$scope.album =  "Album";
-	$scope.genre = "Genre";
+	
 
 
-})
+app.controller("SongListCtrl", 
+	[
+		"$scope",
+		"$firebaseArray",
+		function($scope, $songsArray) {
+			var ref = new Firebase ("https://musichistang.firebaseio.com/songs");
 
-// app.controller("songListCtrl", function($scope){
-	// $scope.viewMusic = "";
-	// $scope.songName = [
- //  {name: "Song Name 1"},
- //  {name: "Song Name 2"},
- //  {name: "Song Name 3"},
- //  {name: "Song Name 4"}
- //  ];
+			$scope.songs_list = $songsArray(ref);
+		}
+	]
+);
 
- //  $scope.artistName = [
+app.controller("AddSongCtrl",
+	[
+		"$scope",
+		"$firebaseArray",
+		function($scope, $songsArray) {
+			var ref = new Firebase ("https://musichistang.firebaseio.com/songs");
+			$scope.songs= $songsArray(ref);
+			$scope.newSong = {};
 
- //  ];
+			$scope.addSong = function() {
+				$scope.songs.$add({
+					artist: $scope.newSong.artist,
+					title: $scope.newSong.title,
+					album: $scope.newSong.album,
+					year: $scope.newSong.year
+				});
+			};
+		}
+	]
+);
 
- 	// 	$scope.songs = "";
-		// $.ajax({
-		// 	url:"/songs.json"})
-		// 	.done(function(songList){
-		// 		$scope.songs = songList;
-		// 		$scope.songs(songList)
-		// 		console.log(songList.songs);
-		// 	});
-		// });
+app.controller("SongDetailCtrl",
+	[
+		"$scope",
+		"$routeParams",
+		"$firebaseArray",
+		function($scope, $routeParams, $songsArray) {
+			$scope.selectedSong = {};
 
+			$scope.songId = $routeParams.songId;
 
-app.controller("SongListCtrl", function($scope, $http) {
-  $scope.songs = null;
-  $http.get('songs.json')
-  .success(function(data, status, headers, config) {
-      console.log("data", data);
-    return $scope.songs = data.songs;
-  })
-  .error(function(data, status, headers, config) {
-    console.log("data", data);
-    console.log("status", status);
-    console.log("headers", headers);
-    console.log("config", config);
-  });
+			var ref = new Firebase("https://musichistang.firebaseio.com/songs");
+			$scope.songs = $songsArray(ref);
 
+			$scope.songs.$loaded()
+				.then(function() {
+					$scope.selectedSong = $scope.songs.$getRecord($scope.songId);
+				})
+				.catch(function(error) {
+					console.log("Error:", error);
+				});
+		}
 
-
-
-})
+	]
+);
