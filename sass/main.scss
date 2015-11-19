@@ -1,0 +1,40 @@
+$font-stack:    Helvetica, sans-serif;
+$primary-color: #333;
+
+body {
+  font: 100% $font-stack;
+  color: $primary-color;
+  background: url('../img/winding-notes-21.jpg') no-repeat center center fixed
+  background-size: cover
+}
+
+// .navbar {
+// 	background-color: #FFB4B0;
+// 	margin-bottom:2em;
+// }
+
+// .leftSelectorForm {
+// 	background-color: #4DD7FA;
+// 	margin-top: 4em;
+// }
+
+// .songList {
+// 	background-color: #FEFAC0;
+// }
+
+// body {
+//   background: url('/img/winding-notes-21.jpg') no-repeat center center fixed
+//   background-size: cover
+// }
+// /*Red = #FFB4B0  
+// Blue = #4DD7FA  
+// Light yellow = #FEFAC0  
+// Dark yellow = #785616*/	
+
+.container 
+  background-color: #FFB4B0;
+
+
+.nav {
+	background-color:  #FFB4B0;
+}

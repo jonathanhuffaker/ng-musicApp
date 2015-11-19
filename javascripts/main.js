@@ -3,6 +3,10 @@ var app = angular.module('musicHistAgainApp', ['firebase','ngRoute']);
 app.config(['$routeProvider',
 	function($routeProvider){
 		$routeProvider
+			// .when('/songs/login',{
+			// 	templateUrl: 'partials/login.html',
+			// 	controller: 'loginCtrl'
+			// })
 			.when('/songs/list', {
 				templateUrl: 'partials/song-list.html',
 				controller: 'SongListCtrl'
