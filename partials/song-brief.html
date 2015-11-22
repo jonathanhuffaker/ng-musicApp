@@ -1,0 +1,17 @@
+<div>
+  <simple-directive>
+
+
+<section class="text--small">
+  <div>
+    By {{ selectedSong.artist }} on {{ selectedSong.album.name }}
+    <ul class="rating">
+      <li class="{{star.class}}" ng-repeat="star in stars">&#9733;</li>
+    </ul>
+  </div>
+</section>
+
+
+
+  </simple-directive> <!-- Contents of song-brief.html will go here -->
+</div>

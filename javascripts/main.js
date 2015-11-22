@@ -1,12 +1,12 @@
-var app = angular.module('musicHistAgainApp', ['firebase','ngRoute']);
+var app = angular.module('musicHistAgainApp', ['firebase','ngRoute', 'Authorize']);
 
 app.config(['$routeProvider',
 	function($routeProvider){
 		$routeProvider
-			// .when('/songs/login',{
-			// 	templateUrl: 'partials/login.html',
-			// 	controller: 'loginCtrl'
-			// })
+			.when('/',{
+				templateUrl: 'partials/login.html',
+				controller: 'authuserCtrl'
+			})
 			.when('/songs/list', {
 				templateUrl: 'partials/song-list.html',
 				controller: 'SongListCtrl'
@@ -28,10 +28,20 @@ app.controller("SongListCtrl",
 	[
 		"$scope",
 		"$firebaseArray",
-		function($scope, $songsArray) {
-			var ref = new Firebase ("https://musichistang.firebaseio.com/songs");
+		"Auth",
+		function($scope, $songsArray, Auth ) {
+			var ref = new Firebase ("https://musichistang.firebaseio.com/user/songs");
+			// adding in the below for login
+			var auth = ref.getAuth();
+			var user = auth.uid;
 
 			$scope.songs_list = $songsArray(ref);
+			// // -------below from Joe ----
+			$scope.showSong = function(song) {
+				return song.userId === user;
+			};
+
+			// ---------^from Joe-------
 		}
 	]
 );
@@ -41,16 +51,32 @@ app.controller("AddSongCtrl",
 		"$scope",
 		"$firebaseArray",
 		function($scope, $songsArray) {
-			var ref = new Firebase ("https://musichistang.firebaseio.com/songs");
+			var ref = new Firebase ("https://musichistang.firebaseio.com/user/songs");
 			$scope.songs= $songsArray(ref);
 			$scope.newSong = {};
+
+// ========
+			// $scope.auth = Auth;
+			// $scope.auth.$onAuth(function(authData) {
+			// 	$scope.userData = authData.uid;
+			// });
+			// =======
 
 			$scope.addSong = function() {
 				$scope.songs.$add({
 					artist: $scope.newSong.artist,
 					title: $scope.newSong.title,
 					album: $scope.newSong.album,
-					year: $scope.newSong.year
+					year: $scope.newSong.year,
+
+				// adding the below for learning derivitives
+				// it worked!
+					rating: $scope.newSong.rating
+				// adding the above for learning derivitives
+
+					// userId: $scope.userData
+
+
 				});
 			};
 		}
@@ -67,7 +93,7 @@ app.controller("SongDetailCtrl",
 
 			$scope.songId = $routeParams.songId;
 
-			var ref = new Firebase("https://musichistang.firebaseio.com/songs");
+			var ref = new Firebase("https://musichistang.firebaseio.com/user/songs");
 			$scope.songs = $songsArray(ref);
 
 			$scope.songs.$loaded()
@@ -81,3 +107,7 @@ app.controller("SongDetailCtrl",
 
 	]
 );
+
+
+
+

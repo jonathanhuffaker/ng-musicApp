@@ -6,9 +6,22 @@
 
 <div class="songsList" ng-repeat="song in songs_list | filter: query">
   <a href="#/songs/{{ song.$id }}">{{ song.title }}</a>
+
+<!-- -----review below - following joes ex for ng-if -->
+<!-- ng-if filters the songs list by uid -->
+<a class="songsList_item" ng-if="showSong(song)" href="#/songs/{{ song.$id }}">{{ song.title }}</a>
+
+<!-- this is an addition applying (or trying to) apply my new derivitive knowledge -->
+    <x-music-history-song-brief song="song" max-rating="5"></x-music-history-song-brief>
+
+<!-- ========addition above ^ working with derivitives======= -->
+
 </div>
 <div>
   {{ error }}
 </div>
 
 <a class="btn btn-default" href="#/songs/new" role="button">Add a New Song</a>
+
+
+
