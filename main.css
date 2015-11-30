@@ -6,3 +6,7 @@
 	background-color: #E8E8E8;
 }
 
+.rating li{
+	display: inline;
+}
+

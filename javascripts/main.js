@@ -40,8 +40,24 @@ app.controller("SongListCtrl",
 			$scope.showSong = function(song) {
 				return song.userId === user;
 			};
-
 			// ---------^from Joe-------
+
+
+// ==========
+// still having trouble with delete
+			// below is for deleting song
+			$scope.deleteSong = function(song){
+				$scope.songs.$remove($scope.songs.$getRecord(song)).then(function(ref){
+
+				}),
+				function(error){
+					console.log(error);
+				};
+			};
+// =============
+
+
+
 		}
 	]
 );
